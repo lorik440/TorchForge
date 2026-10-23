@@ -11,6 +11,7 @@ TorchForge was created with beginners in mind.
 
 Especially those who want to get into the flow of training machine learning models without being overwhelmed by the complexity that can come with getting started.
 The goal is to make the first steps into model development more approachable, allowing learners to focus on understanding the workflow and gradually build confidence in working with PyTorch.
+
 However, simplification comes with trade-offs. 
 Abstracting away complexity can introduce limitations and hide implementation details that are important to understand. TorchForge is intended as a starting point, not a replacement for learning the underlying concepts. Anyone serious about exploring machine learning should investigate these limitations, understand what happens behind the abstractions, and learn when a more hands-on approach is necessary.
 
