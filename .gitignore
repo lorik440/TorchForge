@@ -1,2 +1,14 @@
 #virtual enviroment
 .venv/
+
+# Python package metadata
+*.egg-info/
+__pycache__/
+*.py[cod]
+
+.pytest_cache/
+.ruff_cache/
+
+dist/
+
+TorchFoundry_Development_and_Release_Guide.md
