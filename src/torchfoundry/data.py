@@ -31,7 +31,7 @@ def loadDataset(selector:Selector| None=None, batch_size: int=64):
     testData="not finished"
     raise ValueError("still in development")
 
-    if selector =="train": 
+    if selector =="train":
         training_data= DataLoader(trainData,batch_size=batch_size, shuffle=True)
         return training_data
     elif selector =="test":
@@ -43,5 +43,4 @@ def loadDataset(selector:Selector| None=None, batch_size: int=64):
         return training_data, testing_data
     else:
         raise ValueError("selector must have value { test / train / None }")
-        
 

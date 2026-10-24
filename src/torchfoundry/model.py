@@ -27,7 +27,7 @@ def loadModel(layers,load_dict=None,Summary: bool=False, input_size=None):
         FileNotFoundError: If the checkpoint file does not exist.
     """
 
-    #model device runtime 
+    #model device runtime
     if torch.accelerator.is_available():
         device=torch.accelerator.current_accelerator
     else:

@@ -51,4 +51,3 @@ def trainModel(model, dataloader, loss_fn, optimizer, epoch, save_dict=None ):
         except (OSError, RuntimeError) as e:
             raise RuntimeError(f"Failed to save model state_dict: {e}") from e
 
-
