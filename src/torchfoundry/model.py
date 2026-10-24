@@ -33,6 +33,11 @@ def loadModel(layers,load_dict=None,Summary: bool=False, input_size=None):
     else:
         device='cpu'
 
+    if not isinstance(layers,nn.Module):
+        raise ValueError("layers must contain instances of nn.Module")
+
+    layers=[layers]
+
     class NeuralNetwork(nn.Module):
         def __init__(self):
             super().__init__()
