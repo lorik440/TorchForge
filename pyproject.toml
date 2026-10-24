@@ -34,6 +34,7 @@ classifiers = [
 dependencies = [
     "torch",
     "torchinfo",
+    "numpy"
 ]
 
 [project.optional-dependencies]
