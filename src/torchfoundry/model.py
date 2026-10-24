@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import Literal
 
 import torch
-from rich import print
 from torch import nn
 from torchinfo import summary
 
