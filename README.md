@@ -4,7 +4,16 @@
 
 TorchFoundry is a Python library designed to simplify and improve everyday workflows when working with PyTorch.
 It aims to provide reusable utilities that reduce repetitive code and make machine learning development more convenient.
+
 Make PyTorch development simpler, more reusable, and easier to maintain.
+It is available on
+[pypi](https://pypi.org/project/torchfoundry/)
+
+### Installation
+
+```bash
+pip install torchfoundry
+```
 
 ### 🎓 Built for Learning
 TorchFoundry was created with beginners in mind.
@@ -23,7 +32,10 @@ Abstracting away complexity can introduce limitations and hide implementation de
 ### 🚧 Project Status
 
 TorchFoundry is currently under development. Features, functionality, and APIs are subject to change.
+See the [todo](todo.md) for a list of planned features and improvements.
 
 ### 📄 License
 
-License information will be added as the project develops.
+[MIT License](LICENSE)
+
+## Enjoy exploring TorchFoundry!
