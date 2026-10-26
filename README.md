@@ -34,6 +34,8 @@ Abstracting away complexity can introduce limitations and hide implementation de
 TorchFoundry is currently under development. Features, functionality, and APIs are subject to change.
 See the [todo](todo.md) for a list of planned features and improvements.
 
+### Notice: TorchFoundry is a personal project and is not affiliated with or endorsed by the PyTorch organization.
+
 ### 📄 License
 
 [MIT License](LICENSE)

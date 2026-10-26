@@ -6,9 +6,15 @@
 __pycache__/
 *.py[cod]
 
+# Testing
 .pytest_cache/
 .ruff_cache/
 
+# Distribution / packaging
 dist/
 
+# Documentation
 TorchFoundry_Development_and_Release_Guide.md
+
+# 
+experiments/
