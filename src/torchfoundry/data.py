@@ -1,10 +1,106 @@
-from typing import Literal
 
 from torch.utils.data import DataLoader
+from pathlib import Path
+from typing import Literal
+from importlib import import_module
+
+def getDatasetClass(name: str ):
+    """
+    Get a dataset class from torchvision.datasets by name.
+
+    Parameters
+    ----------
+    name : str
+        Name of the dataset class to retrieve.
+
+    Returns
+    -------
+    type
+        The requested torchvision dataset class.
+
+    Raises
+    ------
+    ValueError
+        If name is not a string.
+    ImportError
+        If torchvision.datasets cannot be imported.
+    """
+
+    if not isinstance(name, str):
+        raise ValueError("name for the dataset parameter must be string")
+
+    try:
+        datasets_module=import_module("torchvision.datasets")
+        datasets_class =getattr(datasets_module, name)
+    except ArithmeticError as exc:
+        raise ValueError(f"Dataset '{name}' was not found in torchvision.dataset"
+                         ) from exc
+    except ImportError as exc:
+        raise ImportError("loading this dataset requires torchvision to be installed"
+                          )from exc
+    return datasets_class
 
 Selector=Literal["train","test"]
 
-def loadDataset(selector:Selector| None=None, batch_size: int=64):
+def prepareDataset(dataset, type:Selector, root, transformer):
+    """
+    Create a torchvision dataset for the selected split.
+
+    Parameters
+    ----------
+    dataset : str
+        Name of the dataset class in torchvision.datasets.
+    type : {"train", "test"} or None
+        Select the training or testing split.
+    root : str, pathlib.Path, or None
+        Dataset directory. If None, uses "data" without downloading.
+    transformer : callable or None
+        Optional transformation applied to each dataset sample.
+
+    Returns
+    -------
+    Dataset
+        An instance of the selected torchvision dataset class.
+
+    Raises
+    ------
+    ValueError
+        If type, root, or transformer has an invalid value.
+    ImportError
+        If torchvision.datasets cannot be imported.
+    """
+
+    if type is not None and not isinstance(type, str):
+        raise ValueError("type must be a string or None")
+    if type not in ("train", "test", None):
+        raise ValueError("type must have value 'train', 'test', or None")
+    if root is not None and not isinstance(root, (str, Path)):
+        raise ValueError("root must be a string, pathlib.Path, or None")
+    if transformer is not None and not callable(transformer):
+        raise ValueError("transfrom must be callable or None")
+
+    if root is None:
+        root ="data"
+        download=False
+    else:
+        download=True
+
+    if type =="train":
+        train=True
+    else:
+        train=False
+
+    dataset_class=getDatasetClass(dataset)
+
+    dataset =dataset_class(
+        root=root,
+        download= download,
+        train=train,
+        transform=transformer
+    )
+    return dataset
+
+def loadDataset(dataset, type:Selector| None=None, batch_size: int=64, shuffle:bool |None =None, root:str|Path|None=None, transformer=None):
     """
     Get a FashionMNIST DataLoader.
 
@@ -22,25 +118,35 @@ def loadDataset(selector:Selector| None=None, batch_size: int=64):
     DataLoader or tuple[training_data, testing_data]
         The selected DataLoader, or both DataLoaders.
     """
-    if type(batch_size) is not int:
+    
+    if not isinstance(batch_size, int) or isinstance(batch_size, bool):
         raise ValueError("batch_size must be an integer")
-    if not 0 < batch_size < 128:
-        raise ValueError("batch_size must be between 1 and 128")
+    if shuffle is not None and not isinstance(shuffle, bool):
+        raise ValueError("shuffle must be a boolean or None")
 
-    trainData= "not finished"
-    testData="not finished"
-    raise ValueError("still in development")
+    if shuffle is None:
+        shuffle=False 
 
-    if selector =="train":
-        training_data= DataLoader(trainData,batch_size=batch_size, shuffle=True)
+    if type =="train":
+
+        train_data=prepareDataset(dataset, type, root, transformer)
+        training_data= DataLoader(train_data,batch_size=batch_size, shuffle=shuffle)
+
         return training_data
-    elif selector =="test":
-        testing_data= DataLoader(testData, batch_size=batch_size, shuffle=True)
-        return testing_data
-    elif selector is None:
-        training_data= DataLoader(trainData,batch_size=batch_size, shuffle=True) 
-        testing_data= DataLoader(testData, batch_size=batch_size, shuffle=True)
-        return training_data, testing_data
-    else:
-        raise ValueError("selector must have value { test / train / None }")
+    
+    elif type =="test":
+        train=True
+        test_data=prepareDataset(dataset, train, root, root, transformer)
+        testing_data= DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
 
+        return testing_data
+    
+    elif type is None:
+        type="test"
+        test_data=prepareDataset(dataset, type, root,  transformer)
+        type="train"
+        train_data=prepareDataset(dataset, type, root,  transformer)
+
+        training_data= DataLoader(train_data, batch_size=batch_size, shuffle=shuffle) 
+        testing_data= DataLoader(test_data, batch_size=batch_size, shuffle=shuffle)
+        return training_data, testing_data

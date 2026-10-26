@@ -2,24 +2,24 @@
 
 ## Data (`data.py`)
 
-- [ ] Finish `loadDataset` by adding dataset initialization and implementing the train/test selector paths.
-- [ ] Make the dataset configurable instead of hardcoding FashionMNIST (accept a dataset class or name parameter).
-- [ ] Fix `batch_size` validation — the docstring says 1–128 but the check `not 0 < batch_size < 128` rejects 128.
-- [ ] Add a `num_workers` and `shuffle` parameter so users can control DataLoader behavior.
+- [x] Finish `loadDataset` by adding dataset initialization and implementing the train/test selector paths.
+- [x] Make the dataset configurable instead of hardcoding FashionMNIST (accept a dataset class or name parameter).
+- [x] Fix `batch_size` validation — the docstring says 1–128 but the check `not 0 < batch_size < 128` rejects 128.
+- [x] Add a `num_workers` and `shuffle` parameter so users can control DataLoader behavior.
 
 ## Model (`model.py`)
 
-- [ ] Rename `load_dict` to `path` (or vice versa) so the parameter name matches the docstring.
-- [ ] Rename the `Summary` parameter to `show_summary` to avoid shadowing the `Summary` type alias.
+- [x] Rename `load_dict` to `path` (or vice versa) so the parameter name matches the docstring.
+- [x] Rename the `Summary` parameter to `show_summary` to avoid shadowing the `Summary` type alias.
 - [ ] Validate that the `layers` list is non-empty before constructing `nn.Sequential`.
 - [ ] Have `saveModel` create parent directories automatically when they don't exist.
 - [ ] Move the `NeuralNetwork` class to module level instead of redefining it on every `loadModel` call.
 
 ## Training (`training.py`)
 
-- [ ] Fix `trainModel` validation so its default `save_dict=None` value is accepted instead of raising `ValueError`.
-- [ ] Validate that `epoch` is a positive integer (> 0).
-- [ ] Add type and value validation for `loss_fn` and `optimizer`.
+- [x] Fix `trainModel` validation so its default `save_dict=None` value is accepted instead of raising `ValueError`.
+- [x] Validate that `epoch` is a positive integer (> 0).
+- [x] Add type and value validation for `loss_fn` and `optimizer`.
 - [ ] Add optional learning-rate scheduler support (pass a scheduler, step it per epoch).
 - [ ] Add optional validation/accuracy tracking after each epoch.
 - [ ] Add an optional early-stopping mechanism based on validation loss.
