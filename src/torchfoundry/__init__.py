@@ -2,9 +2,10 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 
+from .data import getDatasetClass, loadDataset, prepareDataset
 from .model import createModel, loadModel, saveModel
+from .testing import testModel
 from .training import trainModel
-from .data import loadDataset, getDatasetClass, prepareDataset
 
 __all__ = [ 
     # PyTorch 
@@ -15,14 +16,17 @@ __all__ = [
     
     # Dataset utilities 
     "loadDataset",
-    "getDatasrtClass",
+    "getDatasetClass",
     "prepareDataset",
     
     # Model utilities 
-    "createModel"
+    "createModel",
     "loadModel", 
     "saveModel",
 
     # Training utilities 
     "trainModel",
+
+    # Testing utilities
+    "testModel",
 ]
