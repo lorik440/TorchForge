@@ -7,7 +7,6 @@ import torchfoundry as tf
 # Import PyTorch's neural network layers and PyTorch itself.
 from torchfoundry import nn, torch
 
-
 # Load the FashionMNIST dataset.
 # The dataset contains grayscale images of clothing, each measuring 28x28 pixels.
 # shuffle=True randomizes the training data order.
