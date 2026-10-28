@@ -1,10 +1,16 @@
+from pathlib import Path
+
 import torch
 from torch import nn
 from torchinfo import summary
-from pathlib import Path
-from typing import Literal
 
-def createModel(layers:nn.Module| list[nn.Module], path=None, show_Summary: bool=False, input_size: tuple[int,...]=None):
+
+def createModel(
+    layers: nn.Module | list[nn.Module],
+    path=None,
+    show_Summary: bool = False,
+    input_size: tuple[int, ...] = None,
+):
     """
        Creates a PyTorch neural network and optionally loads pretrained weights
     and displays a model summary.
@@ -72,6 +78,20 @@ def createModel(layers:nn.Module| list[nn.Module], path=None, show_Summary: bool
     return model
 
 def  saveModel(model: nn.Module,path:str|Path):
+    """
+    Save a PyTorch model's state dictionary to a file.
+
+    Args:
+        model (nn.Module): PyTorch model whose state dictionary is saved.
+        path (str | Path): Destination file for the state dictionary.
+
+    Returns:
+        None
+
+    Raises:
+        ValueError: If model or path is missing or has an invalid type.
+        RuntimeError: If saving the state dictionary fails.
+    """
 
     if not model:
         raise ValueError("model is a required parameter")
@@ -90,6 +110,20 @@ def  saveModel(model: nn.Module,path:str|Path):
     
 
 def loadModel(model: nn.Module, path: str|Path):
+    """
+    Load saved weights into a PyTorch model when the checkpoint exists.
+
+    Args:
+        model (nn.Module): Model to receive the loaded state dictionary.
+        path (str | Path): Path to the saved state dictionary.
+
+    Returns:
+        nn.Module: The model with loaded weights, or the unchanged model if
+            the checkpoint does not exist.
+
+    Raises:
+        ValueError: If model or path is missing or has an invalid type.
+    """
     
     if not path:
         raise ValueError("path is a required parameter")
@@ -116,6 +150,7 @@ def loadModel(model: nn.Module, path: str|Path):
                 weights_only=True
             )
         )
+        print("model loaded", flush=True)
     else:
         print("model path not found. Starting fresh")
 

@@ -1,8 +1,10 @@
 
-from torch.utils.data import DataLoader
+from importlib import import_module
 from pathlib import Path
 from typing import Literal
-from importlib import import_module
+
+from torch.utils.data import DataLoader
+
 
 def getDatasetClass(name: str ):
     """
@@ -100,7 +102,14 @@ def prepareDataset(dataset, type:Selector, root, transformer):
     )
     return dataset
 
-def loadDataset(dataset, type:Selector| None=None, batch_size: int=64, shuffle:bool |None =None, root:str|Path|None=None, transformer=None):
+def loadDataset(
+    dataset,
+    type: Selector | None = None,
+    batch_size: int = 64,
+    shuffle: bool | None = None,
+    root: str | Path | None = None,
+    transformer=None,
+):
     """
     Get a FashionMNIST DataLoader.
 

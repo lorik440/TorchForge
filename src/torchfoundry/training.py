@@ -1,10 +1,13 @@
+from pathlib import Path
+
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
-from pathlib import Path
-from torchfoundry import saveModel
 
-def trainModel(model, dataloader, loss_fn, optimizer, epoch, path=None ):
+from .model import saveModel
+
+
+def trainModel(model, dataloader, loss_fn, optimizer, epoch, path=None, ):
     """
     Trains a PyTorch model for the specified number of epochs and optionally
     saves its state dictionary.
@@ -46,7 +49,7 @@ def trainModel(model, dataloader, loss_fn, optimizer, epoch, path=None ):
     model.train()
     for e in range(epoch):
         print("")
-        print(f"epoch:{e+1}")
+        print(f"epoch {e+1}\n-----------------------------------", flush=True)
         for batch, (x,y) in enumerate(dataloader):
             x=x.to(device)
             y=y.to(device)
