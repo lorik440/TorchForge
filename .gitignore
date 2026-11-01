@@ -1,4 +1,7 @@
-#virtual enviroment
+# Environment variables
+.env
+
+# Virtual environment
 .venv/
 
 # Python package metadata
