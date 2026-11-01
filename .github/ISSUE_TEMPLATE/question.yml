@@ -1,0 +1,29 @@
+name: ❓ Question
+description: Ask a question about using TorchFoundry.
+title: "[QUESTION]: "
+labels: ["question"]
+body:
+
+* type: textarea
+  id: question
+  attributes:
+  label: Your question
+  description: Explain what you're trying to do and where you're stuck.
+  validations:
+  required: true
+
+* type: textarea
+  id: example
+  attributes:
+  label: Code example
+  description: Include relevant code if applicable.
+  render: python
+  validations:
+  required: false
+
+* type: textarea
+  id: context
+  attributes:
+  label: Additional context
+  validations:
+  required: false
