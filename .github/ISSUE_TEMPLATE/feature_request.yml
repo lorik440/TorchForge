@@ -1,0 +1,38 @@
+name: ✨ Feature Request
+description: Suggest a new feature or improvement for TorchFoundry.
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+
+* type: textarea
+  id: problem
+  attributes:
+  label: What problem would this feature solve?
+  description: Explain the problem or limitation you're experiencing.
+  validations:
+  required: true
+
+* type: textarea
+  id: solution
+  attributes:
+  label: Proposed solution
+  description: Describe how you imagine this feature working.
+  validations:
+  required: true
+
+* type: textarea
+  id: alternatives
+  attributes:
+  label: Alternatives considered
+  description: Have you considered other ways to solve this?
+  validations:
+  required: false
+
+* type: textarea
+  id: example
+  attributes:
+  label: Example usage
+  description: Show how you would like to use this feature.
+  render: python
+  validations:
+  required: false
